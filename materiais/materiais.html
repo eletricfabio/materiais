@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="estilo.css">
+	<script type="text/javascript" src="materiais.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script> 
+	
+<script>
+var dados;
+
+var opcoes2 = {
+    "opcoes1":[
+    {"nome": "Luminária",
+    "opcoes2": [
+        "LED",
+        "Alto Caiçaras",
+        "Alto Colina",
+        "Alvorada",
+        "Alvorada 2",
+        "Antonio Caixeta",
+        "Aurélio Caixeta",
+        "Barreiro",
+        "Bela Vista",
+        "Belvedere",
+        "Boa Vista",
+        "Brasília",
+        "Caiçaras",
+        "Campo Elísios",
+        "Caramuru",
+        "Centro",
+        "Cerrado",
+        "Cidade Jardim",
+        "Cidade Nova (1 e 2)",
+        "Condominios Marabá",
+        "Cônego Getúlio",
+        "Copacabana",
+        "Coração Eucáristico",
+        "Cristo Redentor",
+        "Eldorado",
+        "Gramado",
+        "Guanabara",
+        "Ipanema (1 e 2)",
+        "Jardim América",
+        "Jardim Aquários",
+        "Jardim Califórnia",
+        "Jardim Centro",
+        "Jardim Céu Azul",
+        "Jardim dos Andradas",
+        "Jardim Esperança",
+        "Jardim Floresta",
+        "Jardim Itamarati",
+        "Jardim Panorâmico 1",
+        "Jardim Panorâmico 2",
+        "Jardim Paraiso",
+        "Jardim Paulistano",
+        "Jardim Peluzzo",
+        "Jardim Recanto",
+        "Lagoa Grande",
+        "Lagoinha",
+        "Laranjeiras",
+        "Limoeiro",
+        "Morada do Sol",
+        "Nossa Senhora das Graças",
+        "Nossa Senhora de Fátima",
+        "Nossa Senhora Aparecida",
+        "Nova Floresta",
+        "Novo Horizonte",
+        "Padre Eustáquio",
+        "Planalto",
+        "Quebec",
+        "Residencial Monjolo",
+        "Rosário",
+        "Santa Helena",
+        "Santa Luzia",
+        "Santa Terezinha",
+        "Santo Antonio",
+        "São Francisco",
+        "São José Operário",
+        "Sebastião Amorim",
+        "Setor Industrial",
+        "Sobradinho",
+        "Sorriso",
+        "Valparaíso",
+        "Vila Garcia",
+        "Vila Rosa",
+        "Av Afonso Queiroz",
+        "Av Dilermando Gomes de Deus",
+        "Bretas",
+        "Chacáras Caiçaras",
+        "Hospital HNSF",
+        "Hospital Vera Cruz",
+        "Mart Minas",
+        "Restaurante Popular",
+        "Suinco",
+        "Unipam"
+    ]
+},
+{
+    "nome": "Cabos",
+    "opcoes2":[
+            "AABB",
+            "Aeroporto - Via Ramon",
+            "Alto da Boa Vista",
+            "Areia Branca",
+            "Armazém Chagas",
+            "Bela Vista",
+            "Biquinha",
+            "Canaã I e II",
+            "Carioca",
+            "Carvãozinho",
+            "Casas Populares I e II",
+            "Cascata",
+            "Condomínio Villa Bella",
+            "Conjunto Habitacional Antônio Mendes (Cohab)",
+            "Conjunto Habitacional Helena (Cohab)",
+            "Estação; Bairro Monte Verde",
+            "Floresta",
+            "Hospital Casa de Caridade de São Lourenço",
+            "Hospital Casa de Caridade de São Lourenço",
+            "Ilha Antônio Dutra",
+            "Jardim América",
+            "Jardim das Estâncias",
+            "Jardim Europa",
+            "Jardim Mirante",
+            "Jardim Nirvana",
+            "Jardim Santa Maria I e II",
+            "Jardim São Lourenço",
+            "Jardim Serrano",
+            "João Carvalho Costa",
+            "João de Deus",
+            "João Paulino",
+            "José Açúcar",
+            "Juliana",
+            "Lagoa Seca",
+            "Loteamento Paraíso",
+            "Monte Belo",
+            "Monte Líbano",
+            "Moradas da Serra",
+            "Nossa Senhora de Fátima",
+            "Nossa Senhora de Lourdes",
+            "Nova Estação",
+            "Novo Horizonte Carneiro Imóveis",
+            "Orebe",
+            "Parque das Águas",
+            "Parque Olímpico",
+            "Pedreira",
+            "Pontal da Federal",
+            "Porção Sudeste dos Bairros Serra Azul e Jardim das Acácias",
+            "Porta do Céu",
+            "Porto Alegre",
+            "Recanto das Paineiras",
+            "Residencial Carioca",
+            "Residencial Ferreira de Souza",
+            "Residencial Haidar",
+            "Residencial Rio Verde I e II",
+            "Rodoviária e adjacências",
+            "Rua Batista Luzardo",
+            "Rua Pedro Ribeiro Arantes",
+            "Santa Cecília",
+            "Santa Mônica I e II",
+            "Santa Terezinha",
+            "Santo Cruzeiro",
+            "São João",
+            "São Lourenço Velho",
+            "São Mateus; Serra Verde I e II",
+            "Serra Azul e Jardim das Acácias",
+            "Solar dos Lagos",
+            "Toda região central da cidade",
+            "Várzea",
+            "Vila Carneiro I e II",
+            "Vila Dutra",
+            "Vila Esperança",
+            "Vila Nova I e II",
+            "Vila Pascoal"
+          ]}
+        ]
+};
+
+$(document).ready(function () {
+      dados = opcoes2;
+      var option_opcoes  = '<option value="none">Selecione um material... </option>';
+      $.each(dados.opcoes1, function (i, val) {
+          option_opcoes +=  '<option value="' + val.nome + '">' + val.nome + '</option>';
+      });    
+      $('#opcoes1').html(option_opcoes);
+      $('#opcoes1').change(poulateOpcoes2);
+});    
+                              
+        
+function poulateOpcoes2(){
+    var idx  = $(this)[0].selectedIndex;
+    var val  = $(this).val();
+    var opcoes2 = (idx > 0)? dados.opcoes1[idx-1].opcoes2 : ['Selecione'];
+    var option_opcoes2 = '';
+    $.each(opcoes2, function(i, val){
+      option_opcoes2 += '<option value="' + val + '">' + val + '</option>';
+    });
+    $('#opcoes2').html(option_opcoes2);
+}
+</script>
+
+</head>
+
+	<h2>Padronização de Materiais - Disciplina Elétrica</h2></p>
+
+</ul>
+
+	<title>materiais</title>
+	<link rel="stylesheet" type="text/css" href="materiais">
+
+<body>
+	<section id="boxInserir">
+	Pesquisar</h5>
+	<input type="text" placeholder="Material"></p>
+	Grupo</h5>
+	<input type="text" placeholder="Mercadorias"></p>
+	
+	<hr />
+	
+    <div id="origem" align="length">  
+
+<p><section id="boxInserir"> </p>
+
+		<p class="item"> <img class="checked" align="center" src="imagens\checked.png"> Material de Iluminação
+
+		<form>
+        
+        
+        <label for="opcoes1">Material:</label>
+        <select id="opcoes1">
+        </select>
+        
+        
+        <label for="opcoes2">Tipo:</label>
+        <select id="opcoes2">
+        <option value="">Selecione</option>	
+        <option value="11.627.688 - Luminária portátil; conforme IEC-60598-2-4; em material isolante elétrico; lâmpada fluorescente tubular; 36W; 127Vca; c/ gancho isolado para fixação; classificação NBR IEC 60598-1 isolação classe II (item 2.2); IP 65 - ABNT NBR IEC 60529; Ex d - ABNT NBR IEC 60079-0; Grupo IIB Classe T3.">LED</option>
+		<option value="10.172.566 - Cabo elétrico nu; conforme ABNT NBR 6524; em cobre; têmpera meio dura; classe de encordoamento 2A; seção nominal 10mm².">Cobre NU</option>
+		<option value="11.127.154 - Cabo elétrico nu; conforme ABNT NBR 6524; em cobre; têmpera dura; classe de encordoamento 2A; seção nominal 10mm².">Cobre NU</option>
+        </select>
+    
+		</form>
+
+		<section id="base"> 
+			
+				<div class="title"></div>
+ 				<div id="resultado"></div>
+
+			<script>
+			$("#opcoes1").change(function(event) {
+			$('#resultado').html(" "+$('#opcoes1').val()+"</b>");
+			}); 
+			</script>
+
+			<script>
+			$("#opcoes2").change(function(event) {
+			$('#resultado').html(" "+$('#opcoes2').val()+"</b>");
+			}); 
+			</script>
+
+</body>
+
+</html>

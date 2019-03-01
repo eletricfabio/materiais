@@ -1,0 +1,31 @@
+body{
+	background: url("imagem/index.png");
+	background-size: 100%;
+	background-position: center;
+
+}
+
+a:link, a:visited {
+  background-color: #709acf;
+  color: white;
+  border: 1px solid #709acf;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: Arial;
+  margin-top: 600px;
+  margin-bottom: 500px;
+  margin-left: 205px;
+
+}
+
+a:hover, a:active {
+  background-color: #ee8745;
+  color: #ffffff;
+}
+
+.botao {
+  margin-left: -10px;
+  margin-top: 20px;
+}
