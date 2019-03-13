@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <title></title>
+     <link rel="stylesheet" type="text/css" href="estilo.css">
+     <script type="text/javascript" src="materiais.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+     <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+     <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+     <!-- bootstrap -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+     <!-- angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+
+<script>
+     /* Modulo */
+var app = angular.module('exemploApp', []);
+/* Controller */
+app.controller('exemploCtrl', 
+    function ($scope, $http) {
+        $scope.cliente = {
+            nome: '',
+            material: '',
+            tipo: '',
+            txbreve: '',
+            nm: '',
+            descricao: '',
+        };
+        $scope.carregaMaterial =  function () {        
+            /* altere para a sua URL REST 
+             $http.get('paises.json')
+                        .success(function (data) {
+                            $scope.paises = data;
+                        }); */
+        $scope.material = [
+  { "id": "Iluminação", "nome":" Luminária"},  
+];
+                    }; 
+        
+         $scope.carregaTipo =  function () {        
+            /* altere para a sua URL REST 
+             $http.get('estados.json')
+                        .success(function (data) {
+                            $scope.estados = data;
+                        }); */
+        $scope.tipo = [
+  { "id": "Item 01", "nome":" LED", "material":"Iluminação"},
+];
+                    };            
+        $scope.carregaTxbreve =  function () {        
+            /* altere para a sua URL REST 
+             $http.get('municipios.json')
+                        .success(function (data) {
+                            $scope.cidades = data;
+                        }); */
+        $scope.txbreve = [
+  { "id": "Item01", "nome":"20W; 120 - 277Vca; sobrepor.", "tipo":"Item 01"},
+  { "id": "Item02", "nome":"36W; 120 - 277Vca; arandela 90°.", "tipo":"Item 01"},
+];
+                    };                   
+          $scope.carregaNm =  function () {        
+            /* altere para a sua URL REST 
+             $http.get('municipios.json')
+                        .success(function (data) {
+                            $scope.cidades = data;
+                        }); */
+        $scope.nm = [
+  { "id": "Item01", "nome":"11.941.999", "txbreve":"Item01"},
+  { "id": "Item02", "nome":"12.348.571", "txbreve":"Item02"},
+];
+                    };  
+          $scope.carregaDescricao =  function () {        
+            /* altere para a sua URL REST 
+             $http.get('municipios.json')
+                        .success(function (data) {
+                            $scope.cidades = data;
+                        }); */
+        $scope.descricao = [
+  { "id": " ", "nome":"Luminária LED; 20W; 120 - 277Vca; 50/60Hz; corpo em alumínio isento de cobre; 620,0mm de comprimento; 125,0mm de largura; 166mm de altura; c/ 1 entrada c/ prensa-cabo; NPT Ø3/4pol (ASME B1.20.1); fixação sobrepor; refletor em alumínio; difusor em vidro temperado; IP 66 - ABNT NBR IEC 60529; Ex de - NBR IEC 60079-0; Grupo IIA; Classe de temperatura T4; Tp: NAVILLE EWL51/20 5000K (LUZ BRANCA)", "nm":"Item01"},
+  { "id": " ", "nome":"Luminária LED; 36W; 120 - 277Vca; 50/60Hz; corpo em liga de alumínio; cinza; 610,0mm de comprimento; 166mm de altura; com 1 entrada rosqueada; BSP Ø3/4pol (BS EN 10226-1); c/ 1 entrada c/ prensa-cabo; BSP Ø3/4pol (BS EN 10226-1); fixação arandela 90°; refletor em alumínio; difusor em vidro temperado; com grade de proteção; IP66W - ABNT NBR IEC 60529; Ex d - NBR IEC 60079-0; Grupo IIA; Classe de temperatura T6; Ex tb - ABNT NBR IEC 60079-0; Grupo IIIC; máxima temperatura T80°C; Tp: NAVILLE EWL51/40 ", "nm":"Item02"},
+];
+                    };                  
+
+  });
+
+
+</script>
+</head>
+
+<h2 align="center">PME - Padronização de Materiais Elétricos</h2></p>
+
+</ul>
+
+     <hr />
+
+<body>
+
+<div ng-app="exemploApp"  class="container">
+  <h3 class="text-info">Seleção de Materiais</h3>
+  <form class="form-horizontal" ng-controller="exemploCtrl">
+
+    
+     <div class="form-group">
+      <label for="material" class="col-sm-2 control-label">Material: </label>
+      <div class="col-sm-7">             
+        <select ng-model="cliente.material" 
+                ng-init="carregaMaterial()"
+                ng-change="cliente.especificacao={}"
+                ng-options="material.nome for material in material"                
+                class="form-control" 
+                ng-required="true"
+                id="material">
+          <option value="">-- Selecione o material --</option>
+        </select>      
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="tipo" class="col-sm-2 control-label">Tipo: </label>
+      <div class="col-sm-7">       
+        <select ng-model="cliente.tipo"
+                ng-init="carregaTipo()"
+                ng-options="tipo.nome for tipo in tipo |filter:{material : cliente.material.id}"                
+                class="form-control"
+                ng-required="true"
+                id="tipo">
+          <option value="">-- Selecione o tipo --</option>
+        </select>      
+      </div>
+    </div>
+    
+     <div class="form-group">
+      <label for="txbreve" class="col-sm-2 control-label">Texto breve: </label>
+      <div class="col-sm-7">       
+        <select  ng-model="cliente.txbreve"
+                 ng-init="carregaTxbreve()"
+                ng-options="txbreve.nome for txbreve in txbreve |filter:{tipo : cliente.tipo.id}"
+                class="form-control" 
+                ng-required="true"
+                id="txbreve">
+          <option value="">-- Selecione o texto breve --</option>
+        </select>      
+      </div>
+    </div>
+
+     <div class="form-group">
+      <label for="nm" class="col-sm-2 control-label">Nm: </label>
+      <div class="col-sm-7">       
+        <select  ng-model="cliente.nm"
+                 ng-init="carregaNm()"
+                ng-options="nm.nome for nm in nm |filter:{txbreve : cliente.txbreve.id}"
+                class="form-control" 
+                ng-required="true"
+                id="nm">
+          <option value="">-- Selecione NM --</option>
+        </select>      
+      </div>
+    </div>
+
+     <div class="form-group">
+      <label for="descricao" class="col-sm-2 control-label">Descrição: </label>
+      <div class="col-sm-7">       
+        <select  ng-model="cliente.descricao"
+                 ng-init="carregaDescricao()"
+                ng-options="descricao.nome for descricao in descricao |filter:{nm : cliente.nm.id}"
+                class="form-control" 
+                ng-required="true"
+                id="descricao">
+          <option value="">-- Selecione a descrição --</option>
+        </select>      
+      </div>
+    </div>
+      
+    <div class="well">
+      <div class="col-lg-offset-2">
+          <b>Material:</b> {{cliente.material.id}}{{cliente.material.nome}} <br>
+          <b>Tipo:</b> {{cliente.tipo.id}} -{{cliente.tipo.nome}} <br>
+          <b>Txbreve:</b> {{cliente.txbreve.id}} - {{cliente.txbreve.nome}} <br>
+          <b>NM:</b> {{cliente.nm.id}} - {{cliente.nm.nome}} <br>
+        <b>Descricao:</b> {{cliente.descricao.id}} - {{cliente.descricao.nome}} 
+      </div>
+    </div>
+
+  </form>
+
+</body>
+</html>
