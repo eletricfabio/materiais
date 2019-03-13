@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <title></title>
+     <link rel="stylesheet" type="text/css" href="estilo.css">
+     <script type="text/javascript" src="materiais.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+     <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+     <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+     <!-- bootstrap -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+     <!-- angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+
+<script>
+     /* Modulo */
+var app = angular.module('exemploApp', []);
+/* Controller */
+app.controller('exemploCtrl', 
+    function ($scope, $http) {
+        $scope.cliente = {
+            nome: '',
+            material: '',
+            tipo: '',
+            txbreve: '',
+            especificacao: ''
+        };
+        $scope.carregaMaterial =  function () {        
+            /* altere para a sua URL REST 
+             $http.get('paises.json')
+                        .success(function (data) {
+                            $scope.paises = data;
+                        }); */
+        $scope.material = [
+  { "id": "Iluminação", "nome":" Luminária"},
+  { "id": "US", "nome":"Estados Unidos" },
+  { "id": "CO", "nome":"Colômbia" }    
+];
+                    }; 
+        
+         $scope.carregaTipo =  function () {        
+            /* altere para a sua URL REST 
+             $http.get('estados.json')
+                        .success(function (data) {
+                            $scope.estados = data;
+                        }); */
+        $scope.tipo = [
+  { "id": "Item01", "nome":" LED", "material":"Iluminação"},
+  { "id": "SP", "nome":"São Paulo", "pais":"BR" },
+  { "id": "MG", "nome":"Minas Gerais", "pais":"BR"},  
+  { "id": "NY", "nome":"New York", "pais":"US"},
+  { "id": "DC", "nome":"Distrito Capital", "pais":"CO"}
+];
+                    };            
+        $scope.carregaTxbreve =  function () {        
+            /* altere para a sua URL REST 
+             $http.get('municipios.json')
+                        .success(function (data) {
+                            $scope.cidades = data;
+                        }); */
+        $scope.txbreve = [
+  { "id": " ", "nome":"20W; 120 - 277Vca; 50/60Hz", "tipo":"Item01"},
+];
+                    };                   
+          $scope.carregaEspecificacao =  function () {        
+            /* altere para a sua URL REST 
+             $http.get('municipios.json')
+                        .success(function (data) {
+                            $scope.cidades = data;
+                        }); */
+        $scope.especificacao = [
+  { "id": "11.941.999", "nome":"Luminária LED; 20W; 120 - 277Vca; 50/60Hz; corpo em alumínio isento de cobre; 620,0mm de comprimento; 125,0mm de largura; 166mm de altura; c/ 1 entrada c/ prensa-cabo; NPT Ø3/4pol (ASME B1.20.1); fixação sobrepor; refletor em alumínio; difusor em vidro temperado; IP 66 - ABNT NBR IEC 60529; Ex de - NBR IEC 60079-0; Grupo IIA; Classe de temperatura T4; Tp: NAVILLE EWL51/20 5000K (LUZ BRANCA) ", "txbreve":" "},
+];
+                    };                   
+
+  });
+
+
+</script>
+
+
+<div ng-app="exemploApp"  class="container">
+  <h3 class="text-info">Padronização de Materiais - Disciplina Elétrica</h3>
+  <form class="form-horizontal" ng-controller="exemploCtrl">
+
+    
+     <div class="form-group">
+      <label for="material" class="col-sm-2 control-label">Material </label>
+      <div class="col-sm-7">             
+        <select ng-model="cliente.material" 
+                ng-init="carregaMaterial()"
+                ng-change="cliente.especificacao={}"
+                ng-options="material.nome for material in material"                
+                class="form-control" 
+                ng-required="true"
+                id="material">
+          <option value="">-- Selecione o material --</option>
+        </select>      
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="tipo" class="col-sm-2 control-label">Tipo </label>
+      <div class="col-sm-7">       
+        <select ng-model="cliente.tipo"
+                ng-init="carregaTipo()"
+                ng-options="tipo.nome for tipo in tipo |filter:{material : cliente.material.id}"                
+                class="form-control"
+                ng-required="true"
+                id="tipo">
+          <option value="">-- Selecione o tipo --</option>
+        </select>      
+      </div>
+    </div>
+    
+     <div class="form-group">
+      <label for="txbreve" class="col-sm-2 control-label">Texto breve </label>
+      <div class="col-sm-7">       
+        <select  ng-model="cliente.txbreve"
+                 ng-init="carregaTxbreve()"
+                ng-options="txbreve.nome for txbreve in txbreve |filter:{tipo : cliente.tipo.id}"
+                class="form-control" 
+                ng-required="true"
+                id="txbreve">
+          <option value="">-- Selecione o texto breve --</option>
+        </select>      
+      </div>
+    </div>
+
+     <div class="form-group">
+      <label for="especificacao" class="col-sm-2 control-label">Especificação </label>
+      <div class="col-sm-7">       
+        <select  ng-model="cliente.especificacao"
+                 ng-init="carregaEspecificacao()"
+                ng-options="especificacao.nome for especificacao in especificacao |filter:{txbreve : cliente.txbreve.id}"
+                class="form-control" 
+                ng-required="true"
+                id="especificacao">
+          <option value="">-- Selecione a especificacao --</option>
+        </select>      
+      </div>
+    </div>
+      
+    <div class="well">
+      <div class="col-lg-offset-2">
+          <b>Material:</b> {{cliente.material.id}}{{cliente.material.nome}} <br>
+          <b>Tipo:</b> {{cliente.tipo.id}}{{cliente.tipo.nome}} <br>
+          <b>Txbreve:</b> {{cliente.txbreve.id}}{{cliente.txbreve.nome}} <br>
+        <b>Especificacao:</b> {{cliente.especificacao.id}}-{{cliente.especificacao.nome}} 
+      </div>
+    </div>
+
+     <div class="col-lg-offset-2">
+          <button class="btn btn-success">  Salvar  </button>
+      </div>
+     
+    
+  </form>
+</div>
